@@ -1,0 +1,346 @@
+id: 39d30485-4271-467c-bb3e-122fa941f4d4
+name: Zerve_AI_Hackathon
+project_id: 15b784b8-a185-4318-9f33-2314c5ad5335
+global_imports: []
+python_global_imports: ''
+r_global_imports: ''
+requirements: []
+linux_packages: []
+environment_variables: []
+is_public: true
+organization_id: 586fe835-8985-4ca4-8386-36679917bf89
+layers:
+- blocks:
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Trains LightGBM and CatBoost with 3-fold stratified CV and blends
+      predictions using logit averaging with optimized 0.3/0.7 weights
+    height: 1000
+    id: 097bd9b6-1b55-41e6-a19d-bb340c7d95e9
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: stratified_kfold_ensemble
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 1500
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Separates features from target variable and analyzes missing data
+      patterns across 50 features
+    height: 1000
+    id: 270f0c39-626e-4b6c-8a89-2618f3308abe
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: feature_target_separation
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 0
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Trains LightGBM classifier with 3-fold stratified cross-validation
+      and achieves 0.0649 PR-AUC
+    height: 1000
+    id: 2aa61238-ffb5-45b6-b91d-1ac75d493f07
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: stratified_kfold_lgbm
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 500
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Removes low-correlation engineered features and verifies high-value
+      risk_x_f24 feature retention
+    height: 1000
+    id: 3d663f6a-2927-4cf8-8752-012b8a2f278b
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: drop_useless_features
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 1000
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: 'Handles missing values: creates binary flags for 13 sparse features,
+      fills feature_8 with -999, and imputes others with median'
+    height: 1000
+    id: 3ec2b3ed-4c66-49ef-999d-4de49d39ecf6
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: data_imputation_handling
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 500
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Loads training data from CSV, converts empty strings to NaN, and
+      displays data info
+    height: 1000
+    id: 3f101522-7dd3-4686-a417-1d179d78b9f4
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: load_clean_data
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 0
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Trains neural network classifier with 3-fold CV and ensembles with
+      LGB and CatBoost predictions
+    height: 1000
+    id: 4a4b1140-1ac0-43f4-9be8-a8e695a789b7
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: mlp_ensemble_cv
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: -500
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Displays training/test data summaries, model performance metrics
+      (PR-AUC scores), and visualizes class distribution and test predictions
+    height: 1000
+    id: 7b6e0456-8180-46e8-8458-566a096e8cdf
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: model_performance_summary
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: -500
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Creates binary missing indicators for sparse features, fills feature_8
+      with -999, imputes remaining columns with median values
+    height: 1000
+    id: 7d57793d-70ea-4fb1-b5e2-6bd18a4f45df
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: missing_indicator
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 500
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Trains enhanced CatBoost classifier with 3-fold cross-validation
+      to generate out-of-fold predictions and measures PR-AUC performance
+    height: 1000
+    id: 9b130696-d587-41c4-9933-4ef23cc7cc09
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: catboost_cv_training
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 0
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Prepares test data with missing handling and feature engineering,
+      trains LightGBM and CatBoost on full training data, blends predictions with
+      optimized weights, outputs submission CSV.
+    height: 1000
+    id: a391902f-51da-49b3-a3f5-29ceac576126
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: train_ensemble_models
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: -1000
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Creates higher-order feature interactions and evaluates correlations
+      with target
+    height: 1000
+    id: a98c0ec3-caf5-4e2e-9628-ab3fd1faacff
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: feature_engineering_combinations
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 500
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Creates 18 engineered features combining top predictive features
+      through interactions, ratios, and sums; builds risk_score to separate positive
+      and negative classes
+    height: 1000
+    id: b6da1347-dea1-48da-8186-fbb500b003a4
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: feature_engineering_separation
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 0
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Trains CatBoost classifier with 3-fold cross-validation and blends
+      with LightGBM predictions using logit transformation
+    height: 1000
+    id: bd885fae-5db4-43a0-beb3-385f1a170518
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: catboost_kfold_ensemble
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: 0
+  - auto_size: false
+    canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    compute_settings: null
+    description: Optimizes blend weights between LightGBM and CatBoost predictions
+      to maximize PR-AUC score
+    height: 1000
+    id: e5b12df1-d6bb-4364-90ba-948f214fbb1a
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    name: ensemble_weight_optimization
+    parent_id: null
+    properties: {}
+    status: 3
+    type: 1
+    variables: null
+    width: 1600
+    x: 0
+    y: -500
+  canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+  edges:
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: 1862f988-e54e-4950-8aa4-446384da0c95
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: 2aa61238-ffb5-45b6-b91d-1ac75d493f07
+    target: bd885fae-5db4-43a0-beb3-385f1a170518
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: 1fec4569-344e-4086-a4a4-adab971f26d4
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: a98c0ec3-caf5-4e2e-9628-ab3fd1faacff
+    target: 3d663f6a-2927-4cf8-8752-012b8a2f278b
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: 3b480c54-a875-45cb-b823-18c3ba10aea2
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: 4a4b1140-1ac0-43f4-9be8-a8e695a789b7
+    target: e5b12df1-d6bb-4364-90ba-948f214fbb1a
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: 3c10bc8e-e317-4df8-86e5-1a3434d26fee
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: 9b130696-d587-41c4-9933-4ef23cc7cc09
+    target: a98c0ec3-caf5-4e2e-9628-ab3fd1faacff
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: 4b306a4f-3e0a-4459-94de-74e90124be7f
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: 7d57793d-70ea-4fb1-b5e2-6bd18a4f45df
+    target: 3ec2b3ed-4c66-49ef-999d-4de49d39ecf6
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: 515550c7-94ce-49bf-9474-6816da135c66
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: a391902f-51da-49b3-a3f5-29ceac576126
+    target: 7b6e0456-8180-46e8-8458-566a096e8cdf
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: 9050aad8-f535-4204-8c8d-7822e16bfd72
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: b6da1347-dea1-48da-8186-fbb500b003a4
+    target: 2aa61238-ffb5-45b6-b91d-1ac75d493f07
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: 9da80677-b4a6-40f9-aebf-5733ceaa5326
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: e5b12df1-d6bb-4364-90ba-948f214fbb1a
+    target: a391902f-51da-49b3-a3f5-29ceac576126
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: a1774b4b-0ce2-404b-a246-e365bc7d5983
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: 3ec2b3ed-4c66-49ef-999d-4de49d39ecf6
+    target: b6da1347-dea1-48da-8186-fbb500b003a4
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: a26ec051-5f1e-4b9a-96bb-f833c52de37e
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: 3f101522-7dd3-4686-a417-1d179d78b9f4
+    target: 270f0c39-626e-4b6c-8a89-2618f3308abe
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: ac04eab5-236c-40c4-925c-68ca5d9dee12
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: 270f0c39-626e-4b6c-8a89-2618f3308abe
+    target: 7d57793d-70ea-4fb1-b5e2-6bd18a4f45df
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: cdb9a518-7d4e-4647-8e2e-3d10f1920e21
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: 7b6e0456-8180-46e8-8458-566a096e8cdf
+    target: 9b130696-d587-41c4-9933-4ef23cc7cc09
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: d811d615-5a07-4420-94ae-250f54695ee2
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: 3d663f6a-2927-4cf8-8752-012b8a2f278b
+    target: 097bd9b6-1b55-41e6-a19d-bb340c7d95e9
+  - canvas_id: 39d30485-4271-467c-bb3e-122fa941f4d4
+    id: f0b69895-9e16-47f5-98e7-52197689f76a
+    layer_id: 066f3324-6c42-44be-afed-dd72f7f85fac
+    source: bd885fae-5db4-43a0-beb3-385f1a170518
+    target: 4a4b1140-1ac0-43f4-9be8-a8e695a789b7
+  id: 066f3324-6c42-44be-afed-dd72f7f85fac
+  name: Development
+  type: 1
+assets: []
